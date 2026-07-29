@@ -1,0 +1,135 @@
+// PERKESO Bulletin Dashboard — Prisma schema
+// Internal Knowledge & Communication Portal (IDEONIX for PERKESO)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String   @id @default(cuid())
+  email      String   @unique
+  name       String
+  password   String
+  role       String   @default("Staff") // Admin | Staff
+  department String?
+  branch     String?
+  position   String?
+  avatarUrl  String?
+  isActive   Boolean  @default(true)
+  lastLogin  DateTime?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  notifications Notification[]
+}
+
+model Announcement {
+  id           String   @id @default(cuid())
+  title        String
+  category     String   // Korporat | HR | Operasi | Kesihatan & Keselamatan | ICT | Kewangan
+  summary      String
+  content      String
+  authorId     String?
+  authorName   String
+  isPinned      Boolean  @default(false)
+  isNew        Boolean  @default(true)
+  isUrgent      Boolean  @default(false)
+  attachments  String   @default("[]") // JSON array of {name, type, size}
+  coverColor   String   @default("#007DC5")
+  datePublished DateTime @default(now())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Act {
+  id          String   @id @default(cuid())
+  actNumber   String
+  title       String
+  category    String   // Akta Sosial | Akta Insurans | Peraturan | Lain-lain
+  description String
+  fileUrl     String?
+  fileName    String?
+  fileSize    String?
+  version     String   @default("1.0")
+  status      String   @default("Aktif") // Aktif | Digantikan | Dalam Semakan
+  lastUpdated DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Asip {
+  id            String   @id @default(cuid())
+  title         String
+  referenceNo   String
+  description   String
+  effectiveDate DateTime
+  fileUrl       String?
+  fileName      String?
+  fileSize      String?
+  status        String   @default("Aktif") // Aktif | Digantikan | Dalam Semakan
+  category      String   @default("Umum")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Sop {
+  id             String   @id @default(cuid())
+  title          String
+  department     String   // Pampasan | Perubatan | Kewangan | ICT | HR | Operasi
+  description    String
+  procedureSteps String   @default("[]") // JSON array of strings
+  fileUrl        String?
+  fileName       String?
+  fileSize       String?
+  version        String   @default("1.0")
+  approvedBy     String
+  dateApproved   DateTime @default(now())
+  status         String   @default("Aktif")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Circular {
+  id           String   @id @default(cuid())
+  circularNo   String
+  title        String
+  category     String   // Korporat | HR | Operasi | Kewangan | ICT
+  summary      String
+  content      String
+  fileUrl      String?
+  fileName     String?
+  fileSize     String?
+  isMandatory   Boolean  @default(false)
+  dateIssued   DateTime @default(now())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Faq {
+  id        String   @id @default(cuid())
+  question String
+  answer   String
+  category String   // Caruman | Pampasan | Permohonan | Sistem | Lain-lain
+  tags     String   @default("[]") // JSON array
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String
+  message   String
+  type      String   @default("info") // info | warning | success | critical
+  module    String   @default("Umum") // Announcement | Circular | SOP | Act | ASIP | FAQ
+  refId     String?
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}

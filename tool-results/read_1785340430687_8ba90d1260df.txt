@@ -1,0 +1,913 @@
+     1→IDEONIX
+     2→
+     3→Penyelesaian Digital & Kejuruteraan Perisian
+     4→
+     5→DOKUMEN KEPERLUAN PERNIAGAAN
+     6→
+     7→(BUSINESS REQUIREMENT SPECIFICATION - BRS)
+     8→
+     9→PERKESO BULLETIN DASHBOARD
+    10→
+    11→Portal Pengetahuan & Komunikasi Dalaman (Internal Knowledge &
+    12→Communication Portal)
+    13→
+    14→  ----------------------- -----------------------------------------------
+    15→  Perkara                 Butiran
+    16→
+    17→  Klien                   Pertubuhan Keselamatan Sosial (PERKESO)
+    18→
+    19→  Pembangun Sistem        IDEONIX Sdn Bhd, Malaysia
+    20→
+    21→  Nama Projek             PERKESO Bulletin Dashboard (Portal Pengetahuan
+    22→                          & Komunikasi Dalaman)
+    23→
+    24→  Platform Teknologi      React.js (Front-End), Dummy/Mock Database (JSON
+    25→                          Data Store)
+    26→
+    27→  Alat Pembangunan AI     Z.ai — Model GLM 5.2 (AI-assisted development &
+    28→                          code generation)
+    29→
+    30→  Versi Dokumen           1.0
+    31→
+    32→  Tarikh                  29 Julai 2026
+    33→
+    34→  Status                  Draf Untuk Semakan (Draft for Review)
+    35→  ----------------------- -----------------------------------------------
+    36→
+    37→ISI KANDUNGAN
+    38→
+    39→(Sila 'Update Field' / klik kanan → Update Field dalam Microsoft Word
+    40→untuk menjana nombor muka surat automatik selepas dokumen dibuka)
+    41→
+    42→1. PENGENALAN
+    43→
+    44→1.1 Latar Belakang
+    45→
+    46→Pertubuhan Keselamatan Sosial (PERKESO) memerlukan satu platform digital
+    47→dalaman yang bersepadu bagi memudahkan penyebaran maklumat, pengurusan
+    48→dokumen operasi, serta komunikasi rasmi antara Ibu Pejabat, cawangan,
+    49→dan kakitangan di seluruh negara. Buat masa ini, penyebaran maklumat
+    50→seperti pekeliling, Akta, prosedur operasi standard (SOP), dan
+    51→pengumuman dilakukan secara berselerak melalui e-mel, WhatsApp, dan
+    52→portal yang tidak bersepadu, menyebabkan kesukaran capaian, versi
+    53→dokumen yang tidak konsisten, dan kelewatan penyebaran maklumat penting.
+    54→
+    55→IDEONIX Sdn Bhd dilantik untuk membangunkan sebuah sistem yang dinamakan
+    56→"PERKESO Bulletin Dashboard", iaitu satu Portal Pengetahuan & Komunikasi
+    57→Dalaman (Internal Knowledge & Communication Portal) yang menyediakan
+    58→capaian terpusat kepada Akta, ASIP (Akta Skim Insurans
+    59→Pekerjaan/Pekerja), SOP, pekeliling, soalan lazim (FAQ), serta
+    60→pengumuman rasmi organisasi.
+    61→
+    62→1.2 Tujuan Dokumen
+    63→
+    64→Dokumen Keperluan Perniagaan (BRS) ini bertujuan untuk:
+    65→
+    66→-   Menerangkan skop, objektif, dan keperluan fungsian serta bukan
+    67→    fungsian bagi sistem PERKESO Bulletin Dashboard.
+    68→
+    69→-   Menjadi rujukan rasmi antara pihak IDEONIX (pembangun) dan PERKESO
+    70→    (pemilik sistem) sepanjang kitaran pembangunan projek.
+    71→
+    72→-   Menetapkan asas reka bentuk antara muka pengguna (UI/UX), identiti
+    73→    jenama, dan seni bina teknikal sistem.
+    74→
+    75→-   Menjadi panduan pembangunan menggunakan platform Z.ai dengan model
+    76→    AI GLM 5.2 bagi penjanaan kod React.
+    77→
+    78→1.3 Skop Projek
+    79→
+    80→Skop pembangunan meliputi reka bentuk dan pembangunan prototaip
+    81→berfungsi (functional prototype) menggunakan React.js dengan data store
+    82→tiruan (dummy/mock data store), tanpa integrasi kepada pangkalan data
+    83→sebenar atau sistem back-end PERKESO pada fasa ini. Sistem akan
+    84→dibangunkan sebagai Single Page Application (SPA) yang responsif
+    85→merentasi peranti desktop, tablet, dan mudah alih.
+    86→
+    87→1.3.1 Dalam Skop (In-Scope)
+    88→
+    89→-   Halaman Log Masuk (Mock Login) dengan peranan pengguna (role-based)
+    90→    — Admin dan Pengguna Am.
+    91→
+    92→-   Papan Pemuka (Dashboard) utama dengan ringkasan bulletin, statistik,
+    93→    dan widget.
+    94→
+    95→-   Navigasi Bar Sisi (Sidebar Navigation) responsif dengan menu boleh
+    96→    kolaps.
+    97→
+    98→-   Modul Pengumuman/Berita (Announcement & News Module).
+    99→
+   100→-   Modul Akta (Act Module).
+   101→
+   102→-   Modul ASIP (ASIP Module).
+   103→
+   104→-   Modul SOP (Standard Operating Procedure Module).
+   105→
+   106→-   Modul Pekeliling (Circulars Module).
+   107→
+   108→-   Modul Soalan Lazim (FAQ Module).
+   109→
+   110→-   Fungsi Carian Global (Global Search) merentasi semua modul.
+   111→
+   112→-   Sistem Notifikasi (Notifications) dalam masa nyata (simulasi).
+   113→
+   114→-   Placeholder Pratonton Dokumen (Document Preview Placeholder) untuk
+   115→    PDF/DOCX.
+   116→
+   117→-   Reka Bentuk Responsif (Responsive Layout) — Desktop, Tablet, Mobile.
+   118→
+   119→-   Suis Mod Gelap/Terang (Dark Mode Toggle).
+   120→
+   121→-   Data Store Tiruan (Fake/Mock Database) menggunakan JSON/JavaScript
+   122→    object berstruktur.
+   123→
+   124→-   Struktur Sedia-Admin (Admin-Ready Structure) untuk pengurusan
+   125→    kandungan (CRUD) pada peringkat antara muka.
+   126→
+   127→1.3.2 Luar Skop (Out-of-Scope)
+   128→
+   129→-   Integrasi pangkalan data sebenar (SQL/NoSQL) dan pelayan back-end
+   130→    (backend server) sebenar.
+   131→
+   132→-   Pengesahan pengguna sebenar (real authentication), Single Sign-On
+   133→    (SSO), atau integrasi Active Directory PERKESO.
+   134→
+   135→-   Integrasi dengan sistem sedia ada PERKESO seperti SIC, e-SPTPTM,
+   136→    atau sistem HR dalaman.
+   137→
+   138→-   Penghantaran e-mel/SMS sebenar bagi notifikasi.
+   139→
+   140→-   Keperluan pematuhan MyGovCloud / SPKM secara penuh (akan dinilai
+   141→    pada fasa produksi berasingan).
+   142→
+   143→1.4 Objektif Projek
+   144→
+   145→1.  Menyediakan satu platform tunggal (single source of truth) bagi
+   146→    semua maklumat rasmi, Akta, SOP, dan pekeliling PERKESO.
+   147→
+   148→2.  Meningkatkan kecekapan capaian maklumat kakitangan melalui fungsi
+   149→    carian global dan kategori berstruktur.
+   150→
+   151→3.  Mewujudkan pengalaman pengguna (UX) yang moden, konsisten dengan
+   152→    identiti jenama PERKESO, dan mesra pengguna.
+   153→
+   154→4.  Membina asas seni bina sistem (front-end architecture) yang mudah
+   155→    dikembangkan (scalable) untuk integrasi back-end sebenar pada fasa
+   156→    akan datang.
+   157→
+   158→5.  Menyokong pembangunan pantas (rapid development) menggunakan bantuan
+   159→    AI generatif (Z.ai GLM 5.2) bagi mempercepatkan penghasilan kod.
+   160→
+   161→2. PIHAK BERKEPENTINGAN (STAKEHOLDERS)
+   162→
+   163→  ------------------- ------------------- --------------------------------
+   164→  Peranan             Organisasi          Tanggungjawab
+   165→
+   166→  Pemilik Projek      PERKESO             Meluluskan keperluan, identiti
+   167→  (Project Owner)                         jenama, dan kandungan portal
+   168→
+   169→  Pembangun Sistem    IDEONIX Sdn Bhd     Reka bentuk, pembangunan, dan
+   170→  (System Developer)                      penyampaian sistem
+   171→
+   172→  Pentadbir Sistem    PERKESO (Bahagian   Mengurus kandungan bulletin,
+   173→  (System Admin)      Komunikasi          pengumuman, dan pekeliling
+   174→                      Korporat/ICT)       
+   175→
+   176→  Pengguna Akhir (End Kakitangan PERKESO  Melayari, membaca, dan mencari
+   177→  User)               seluruh cawangan    maklumat rasmi
+   178→  ------------------- ------------------- --------------------------------
+   179→
+   180→3. IDENTITI VISUAL & PENJENAMAAN (BRANDING)
+   181→
+   182→3.1 Identiti Jenama IDEONIX
+   183→
+   184→Logo IDEONIX yang dibekalkan (rujuk Lampiran A) menggunakan lettermark
+   185→tersuai berbentuk huruf 'X' yang melambangkan pautan silang idea,
+   186→sinergi kolaboratif, kekuatan struktur, dan ketangkasan (agility) dalam
+   187→penyelesaian masalah. Dua warna teras jenama IDEONIX adalah seperti
+   188→berikut:
+   189→
+   190→  ------------------------ -------------------- --------------------------
+   191→  Nama Warna               Kod Warna            Makna/Rasional
+   192→
+   193→  Midnight Blue            #002147              Kestabilan korporat —
+   194→                                                profesionalisme, integriti
+   195→                                                mendalam, kebijaksanaan
+   196→                                                strategik, dan kestabilan
+   197→                                                operasi
+   198→
+   199→  Amber Orange             #FFBF00              Percikan Phoenix — tenaga
+   200→                                                kreatif dinamik,
+   201→                                                keberanian meneroka
+   202→                                                inovasi, dan pemikiran
+   203→                                                luar kotak
+   204→  ------------------------ -------------------- --------------------------
+   205→
+   206→Warna jenama IDEONIX (#002147 & #FFBF00) akan digunakan sebagai warna
+   207→aksen sekunder pada elemen berjenama IDEONIX sahaja (contoh: footer
+   208→"Powered by IDEONIX", halaman log masuk, atau credit pembangun),
+   209→manakala keseluruhan tema portal akan mengguna pakai identiti visual
+   210→rasmi PERKESO seperti dijelaskan di bawah, untuk memastikan portal kekal
+   211→dikenali sebagai aset digital PERKESO.
+   212→
+   213→3.2 Identiti Visual PERKESO (Tema Portal)
+   214→
+   215→Berdasarkan dokumen "Identiti Visual & Penjenamaan (PERKESO)" yang
+   216→dibekalkan, palet warna berikut digunakan sebagai tema rasmi seluruh
+   217→portal:
+   218→
+   219→3.2.1 Warna Utama
+   220→
+   221→  ---------------------------- -------------------- ----------------------
+   222→  Warna                        Kod HEX              Kod RGB
+   223→
+   224→  Biru PERKESO (Primary Blue)  #007DC5              RGB(0, 125, 197)
+   225→
+   226→  Putih (White) — latar        #FFFFFF              RGB(255, 255, 255)
+   227→  belakang                                          
+   228→
+   229→  Hijau PERKESO (Primary       #8DC63E              RGB(141, 198, 62)
+   230→  Green)                                            
+   231→  ---------------------------- -------------------- ----------------------
+   232→
+   233→Nota: Warna putih hanya digunakan sebagai warna latar belakang bagi
+   234→memastikan kejelasan dan konsistensi identiti jenama.
+   235→
+   236→3.2.2 Warna Sekunder
+   237→
+   238→  -------------------------------- --------------------------------------
+   239→  Warna Sekunder                   Kod HEX
+   240→
+   241→  Biru Gelap                       #004E7A
+   242→
+   243→  Hijau Gelap                      #597E26
+   244→
+   245→  Kehijauan Kebiruan (Teal)        #00C5AB
+   246→
+   247→  Kuning Emas                      #F9BF10
+   248→
+   249→  Oren                             #F27130
+   250→
+   251→  Merah                            #ED1C24
+   252→  -------------------------------- --------------------------------------
+   253→
+   254→3.2.3 Warna Neutral
+   255→
+   256→  -------------------------------- --------------------------------------
+   257→  Warna Neutral                    Kod HEX
+   258→
+   259→  Neutral Paling Gelap (Teks       #202124
+   260→  Utama)                           
+   261→
+   262→  Neutral Gelap                    #3C4043
+   263→
+   264→  Neutral Sederhana                #5F6368
+   265→
+   266→  Neutral Cerah                    #9AA0A6
+   267→
+   268→  Neutral Paling Cerah             #BDC1C6
+   269→  (Garis/Border)                   
+   270→  -------------------------------- --------------------------------------
+   271→
+   272→3.3 Aplikasi Tema dalam Portal
+   273→
+   274→  ---------------------------- ------------------------------------------
+   275→  Elemen Antara Muka           Warna Digunakan
+   276→
+   277→  Header / Bar Navigasi Atas   #007DC5 (Biru Utama PERKESO), teks putih
+   278→                               #FFFFFF
+   279→
+   280→  Sidebar Navigasi             Latar #FFFFFF / #202124 (mod gelap), aksen
+   281→                               aktif #007DC5
+   282→
+   283→  Butang Tindakan Utama        #007DC5 dengan hover #004E7A
+   284→  (Primary CTA)                
+   285→
+   286→  Lencana/Badge Status Baharu  #8DC63E (Hijau) untuk 'Baharu', #ED1C24
+   287→                               (Merah) untuk 'Segera/Penting'
+   288→
+   289→  Notifikasi Amaran            #F9BF10 (Kuning Emas)
+   290→
+   291→  Teks Badan (Body Text)       #202124 / #3C4043
+   292→
+   293→  Teks Sekunder / Placeholder  #5F6368 / #9AA0A6
+   294→
+   295→  Garis Pemisah                #BDC1C6
+   296→  (Divider/Border)             
+   297→
+   298→  Latar Belakang Utama Portal  #FFFFFF (mod terang) / #202124 (mod gelap)
+   299→
+   300→  Footer Kredit Pembangun      #002147 (Midnight Blue IDEONIX) dengan
+   301→                               aksen #FFBF00 (Amber Orange)
+   302→  ---------------------------- ------------------------------------------
+   303→
+   304→Fon (Font) dicadangkan: 'Inter' atau 'Roboto' bagi teks badan
+   305→(sans-serif, jelas dibaca pada skrin), dan berat fon 'Bold/Semi-Bold'
+   306→bagi tajuk utama, selaras dengan gaya tipografi moden yang digunakan
+   307→pada bahan pemasaran IDEONIX.
+   308→
+   309→4. SENI BINA TEKNIKAL SISTEM
+   310→
+   311→4.1 Teknologi & Alatan
+   312→
+   313→  ------------------------ ----------------------------------------------
+   314→  Komponen                 Teknologi/Alatan
+   315→
+   316→  Front-End Framework      React.js (Functional Components + React Hooks)
+   317→
+   318→  Routing                  React Router DOM (routing sisi klien /
+   319→                           client-side routing)
+   320→
+   321→  Pengurusan Status (State React Context API / useState / useReducer
+   322→  Management)              (untuk prototaip)
+   323→
+   324→  Reka Bentuk & Gaya       Tailwind CSS / CSS Modules — berdasarkan tema
+   325→  (Styling)                warna PERKESO & IDEONIX
+   326→
+   327→  Ikon                     Lucide React / Font Awesome
+   328→
+   329→  Carta & Statistik        Recharts / Chart.js
+   330→  Dashboard                
+   331→
+   332→  Data Store               Fake/Mock Database — fail JSON berstruktur
+   333→                           (data/*.json) disimulasikan sebagai API
+   334→
+   335→  Alat Bantuan Pembangunan Z.ai — Model GLM 5.2 (penjanaan kod, komponen
+   336→  AI                       React, dan logik mock API)
+   337→
+   338→  Kawalan Versi            Git / GitHub (atau repositori dalaman IDEONIX)
+   339→
+   340→  Responsive Design        Mobile-first, breakpoint mengikut standard
+   341→                           Tailwind (sm, md, lg, xl)
+   342→  ------------------------ ----------------------------------------------
+   343→
+   344→4.2 Struktur Data Tiruan (Fake Data Store)
+   345→
+   346→Data store tiruan akan disimulasikan sebagai satu lapisan 'mock API'
+   347→menggunakan fail JSON tempatan atau JavaScript object di dalam folder
+   348→/src/data/, mensimulasikan respons seolah-olah dari REST API sebenar
+   349→(contoh: getAnnouncements(), getActs(), getSOPs()). Struktur data
+   350→dicadangkan seperti berikut:
+   351→
+   352→  ----------------- -----------------------------------------------------
+   353→  Entiti            Medan Data (Fields)
+   354→
+   355→  User              id, name, role (Admin/Staff), department, branch,
+   356→                    avatarUrl, email
+   357→
+   358→  Announcement      id, title, category, content, datePublished,
+   359→                    isPinned, isNew, author, attachments[]
+   360→
+   361→  Act               id, actNumber, title, category, description, fileUrl,
+   362→                    lastUpdated, version
+   363→
+   364→  ASIP              id, title, referenceNo, description, effectiveDate,
+   365→                    fileUrl, status
+   366→
+   367→  SOP               id, title, department, procedureSteps[], fileUrl,
+   368→                    version, approvedBy, dateApproved
+   369→
+   370→  Circular          id, circularNo, title, dateIssued, category, fileUrl,
+   371→                    isMandatory
+   372→
+   373→  FAQ               id, question, answer, category, tags[]
+   374→
+   375→  Notification      id, userId, message, type (info/warning/success),
+   376→                    isRead, timestamp
+   377→
+   378→  SearchIndex       moduleType, refId, title, keywords[]
+   379→  ----------------- -----------------------------------------------------
+   380→
+   381→4.3 Struktur Folder Cadangan Projek React
+   382→
+   383→perkeso-bulletin-dashboard/
+   384→
+   385→-   src/components/ — Komponen boleh guna semula (Sidebar, Header,
+   386→    SearchBar, NotificationBell, DarkModeToggle, DocumentPreview, Card,
+   387→    Badge, Modal)
+   388→
+   389→-   src/pages/ — Halaman utama (Login, Dashboard, Announcements, Acts,
+   390→    ASIP, SOP, Circulars, FAQ, AdminPanel)
+   391→
+   392→-   src/data/ — Fail JSON data tiruan (mockAnnouncements.json,
+   393→    mockActs.json, dsb.)
+   394→
+   395→-   src/context/ — Context API (AuthContext, ThemeContext,
+   396→    NotificationContext)
+   397→
+   398→-   src/hooks/ — Custom hooks (useSearch, useAuth, useTheme)
+   399→
+   400→-   src/routes/ — Konfigurasi routing & Protected Routes berasaskan
+   401→    peranan
+   402→
+   403→-   src/assets/ — Logo IDEONIX, ikon, imej placeholder
+   404→
+   405→-   src/styles/ — Konfigurasi tema warna (theme.js / tailwind.config.js)
+   406→
+   407→5. KEPERLUAN FUNGSIAN (FUNCTIONAL REQUIREMENTS)
+   408→
+   409→5.1 Halaman Log Masuk (Mock Login Page)
+   410→
+   411→  ------------- ---------------------------------------------------------
+   412→  ID            Keperluan
+   413→
+   414→  FR-1.1        Sistem mesti memaparkan borang log masuk dengan medan ID
+   415→                Pengguna/E-mel dan Kata Laluan.
+   416→
+   417→  FR-1.2        Sistem mesti memaparkan logo IDEONIX dan/atau logo
+   418→                PERKESO pada halaman log masuk mengikut identiti jenama
+   419→                yang ditetapkan.
+   420→
+   421→  FR-1.3        Log masuk disimulasikan (mock authentication) menggunakan
+   422→                data pengguna tiruan tanpa pengesahan pelayan sebenar.
+   423→
+   424→  FR-1.4        Sistem mesti menyokong dua peranan pengguna: Admin dan
+   425→                Pengguna Am (Staff), yang menentukan paparan menu dan hak
+   426→                capaian selepas log masuk.
+   427→
+   428→  FR-1.5        Sistem mesti memaparkan mesej ralat mudah jika medan
+   429→                input tidak diisi (validasi asas borang).
+   430→
+   431→  FR-1.6        Latar belakang halaman log masuk menggunakan gabungan
+   432→                warna Biru PERKESO (#007DC5) dan aksen Midnight
+   433→                Blue/Amber IDEONIX (#002147/#FFBF00) sebagai kredit
+   434→                pembangun di bahagian footer.
+   435→  ------------- ---------------------------------------------------------
+   436→
+   437→5.2 Papan Pemuka (Dashboard) Utama
+   438→
+   439→  ------------- ---------------------------------------------------------
+   440→  ID            Keperluan
+   441→
+   442→  FR-2.1        Papan pemuka memaparkan ringkasan kad statistik (contoh:
+   443→                Jumlah Pengumuman Aktif, Pekeliling Terkini, SOP Baharu,
+   444→                Notifikasi Belum Dibaca).
+   445→
+   446→  FR-2.2        Papan pemuka memaparkan senarai 'Pengumuman Terkini'
+   447→                (widget carousel/list) dengan label 'Baharu' menggunakan
+   448→                lencana hijau (#8DC63E).
+   449→
+   450→  FR-2.3        Papan pemuka memaparkan carta ringkas (contoh: bilangan
+   451→                dokumen mengikut kategori) menggunakan komponen carta
+   452→                React.
+   453→
+   454→  FR-2.4        Papan pemuka memaparkan pautan pintasan (quick links)
+   455→                kepada modul Akta, ASIP, SOP, dan Pekeliling.
+   456→
+   457→  FR-2.5        Papan pemuka mesti responsif dan menyusun semula widget
+   458→                mengikut susunan bertindih (stacked) pada paparan mudah
+   459→                alih.
+   460→  ------------- ---------------------------------------------------------
+   461→
+   462→5.3 Navigasi Bar Sisi (Sidebar Navigation)
+   463→
+   464→  ------------- ---------------------------------------------------------
+   465→  ID            Keperluan
+   466→
+   467→  FR-3.1        Sidebar memaparkan menu: Dashboard, Pengumuman, Akta,
+   468→                ASIP, SOP, Pekeliling, FAQ, dan (jika Admin) Panel
+   469→                Pentadbiran.
+   470→
+   471→  FR-3.2        Sidebar boleh dikolapskan (collapse/expand) untuk
+   472→                memaksimumkan ruang paparan kandungan.
+   473→
+   474→  FR-3.3        Item menu aktif mesti ditonjolkan menggunakan warna Biru
+   475→                PERKESO (#007DC5) sebagai penanda status aktif.
+   476→
+   477→  FR-3.4        Pada paparan mudah alih, sidebar bertukar menjadi menu
+   478→                hamburger/drawer yang boleh ditarik keluar (slide-in).
+   479→
+   480→  FR-3.5        Sidebar memaparkan ikon setiap modul bagi memudahkan
+   481→                pengecaman visual pantas.
+   482→  ------------- ---------------------------------------------------------
+   483→
+   484→5.4 Modul Pengumuman/Berita (Announcement & News Module)
+   485→
+   486→  ------------- ---------------------------------------------------------
+   487→  ID            Keperluan
+   488→
+   489→  FR-4.1        Memaparkan senarai pengumuman dalam bentuk kad (card
+   490→                list) dengan tajuk, ringkasan, tarikh, kategori, dan
+   491→                status (Baharu/Segera).
+   492→
+   493→  FR-4.2        Pengguna boleh menapis (filter) pengumuman mengikut
+   494→                kategori (Korporat, HR, Operasi, Kesihatan & Keselamatan,
+   495→                dll.) dan tarikh.
+   496→
+   497→  FR-4.3        Klik pada pengumuman membuka paparan penuh (detail view)
+   498→                atau modal dengan kandungan lengkap dan lampiran (jika
+   499→                ada).
+   500→
+   501→  FR-4.4        Pengumuman disemat (pinned) mesti sentiasa terpapar di
+   502→                bahagian teratas senarai.
+   503→
+   504→  FR-4.5        (Admin) Antara muka membenarkan Tambah/Edit/Padam
+   505→                pengumuman (CRUD terhadap data tiruan dalam state React).
+   506→  ------------- ---------------------------------------------------------
+   507→
+   508→5.5 Modul Akta (Act Module)
+   509→
+   510→  ------------- ---------------------------------------------------------
+   511→  ID            Keperluan
+   512→
+   513→  FR-5.1        Memaparkan senarai Akta berkaitan PERKESO (contoh: Akta
+   514→                Keselamatan Sosial Pekerja 1969, Akta Sistem Insurans
+   515→                Pekerjaan 2017) dalam format jadual/senarai berkategori.
+   516→
+   517→  FR-5.2        Setiap entri Akta memaparkan nombor akta, tajuk, tarikh
+   518→                kemas kini terakhir, dan versi dokumen.
+   519→
+   520→  FR-5.3        Pengguna boleh mencari Akta menggunakan kata kunci tajuk
+   521→                atau nombor akta.
+   522→
+   523→  FR-5.4        Klik pada Akta membuka placeholder pratonton dokumen
+   524→                (rujuk Seksyen 5.11).
+   525→
+   526→  FR-5.5        (Admin) Membenarkan muat naik (simulasi) dan pengurusan
+   527→                metadata Akta baharu.
+   528→  ------------- ---------------------------------------------------------
+   529→
+   530→5.6 Modul ASIP (ASIP Module)
+   531→
+   532→  ------------- ---------------------------------------------------------
+   533→  ID            Keperluan
+   534→
+   535→  FR-6.1        Memaparkan senarai dokumen ASIP dengan nombor rujukan,
+   536→                tajuk, tarikh berkuat kuasa, dan status
+   537→                (Aktif/Digantikan).
+   538→
+   539→  FR-6.2        Pengguna boleh menapis ASIP mengikut status dan tarikh
+   540→                berkuat kuasa.
+   541→
+   542→  FR-6.3        Paparan terperinci ASIP memaparkan ringkasan kandungan
+   543→                dan pautan pratonton dokumen.
+   544→
+   545→  FR-6.4        (Admin) Membenarkan pengurusan (tambah/kemas
+   546→                kini/nyahaktifkan) entri ASIP tiruan.
+   547→  ------------- ---------------------------------------------------------
+   548→
+   549→5.7 Modul SOP (SOP Module)
+   550→
+   551→  ------------- ---------------------------------------------------------
+   552→  ID            Keperluan
+   553→
+   554→  FR-7.1        Memaparkan senarai SOP mengikut jabatan/bahagian (contoh:
+   555→                Bahagian Pampasan, Bahagian Perubatan, Bahagian
+   556→                Kewangan).
+   557→
+   558→  FR-7.2        Setiap SOP memaparkan versi, tarikh diluluskan, pelulus
+   559→                (approved by), dan langkah-langkah prosedur ringkas.
+   560→
+   561→  FR-7.3        SOP boleh dikembangkan (expand/accordion) untuk
+   562→                memaparkan langkah prosedur penuh dalam format senarai
+   563→                bernombor.
+   564→
+   565→  FR-7.4        (Admin) Membenarkan pengurusan versi SOP (version control
+   566→                ringkas pada peringkat metadata).
+   567→  ------------- ---------------------------------------------------------
+   568→
+   569→5.8 Modul Pekeliling (Circulars Module)
+   570→
+   571→  ------------- ---------------------------------------------------------
+   572→  ID            Keperluan
+   573→
+   574→  FR-8.1        Memaparkan senarai pekeliling rasmi dengan nombor
+   575→                pekeliling, tajuk, tarikh dikeluarkan, dan kategori.
+   576→
+   577→  FR-8.2        Pekeliling wajib (mandatory) ditandakan dengan lencana
+   578→                khas (contoh: warna merah #ED1C24 'Wajib Dibaca').
+   579→
+   580→  FR-8.3        Pengguna boleh menapis dan menyusun pekeliling mengikut
+   581→                tarikh terkini/terlama.
+   582→
+   583→  FR-8.4        (Admin) Membenarkan penerbitan pekeliling baharu
+   584→                (simulasi borang input).
+   585→  ------------- ---------------------------------------------------------
+   586→
+   587→5.9 Modul Soalan Lazim (FAQ Module)
+   588→
+   589→  ------------- ---------------------------------------------------------
+   590→  ID            Keperluan
+   591→
+   592→  FR-9.1        Memaparkan senarai soalan lazim dalam format accordion
+   593→                (soalan boleh diklik untuk memaparkan jawapan).
+   594→
+   595→  FR-9.2        FAQ dikategorikan mengikut topik (contoh: Caruman,
+   596→                Pampasan, Permohonan, Sistem).
+   597→
+   598→  FR-9.3        Terdapat fungsi carian dalaman khas untuk modul FAQ.
+   599→
+   600→  FR-9.4        (Admin) Membenarkan tambah/edit/padam pasangan
+   601→                soalan-jawapan.
+   602→  ------------- ---------------------------------------------------------
+   603→
+   604→5.10 Carian Global (Global Search)
+   605→
+   606→  ------------- ---------------------------------------------------------
+   607→  ID            Keperluan
+   608→
+   609→  FR-10.1       Bar carian global terletak pada header, boleh diakses
+   610→                dari mana-mana halaman dalam portal.
+   611→
+   612→  FR-10.2       Carian mesti merentasi semua modul (Pengumuman, Akta,
+   613→                ASIP, SOP, Pekeliling, FAQ) secara serentak.
+   614→
+   615→  FR-10.3       Keputusan carian dipaparkan berkategori mengikut modul
+   616→                asal, dengan penonjolan kata kunci (highlight) pada teks
+   617→                padanan.
+   618→
+   619→  FR-10.4       Carian mesti memaparkan cadangan pantas
+   620→                (autosuggest/dropdown) semasa pengguna menaip.
+   621→  ------------- ---------------------------------------------------------
+   622→
+   623→5.11 Notifikasi (Notifications)
+   624→
+   625→  ------------- ---------------------------------------------------------
+   626→  ID            Keperluan
+   627→
+   628→  FR-11.1       Ikon loceng notifikasi pada header memaparkan bilangan
+   629→                notifikasi belum dibaca (badge counter).
+   630→
+   631→  FR-11.2       Panel dropdown notifikasi memaparkan senarai kemas kini
+   632→                terkini (pengumuman baharu, pekeliling baharu, SOP
+   633→                dikemas kini).
+   634→
+   635→  FR-11.3       Pengguna boleh menanda notifikasi sebagai 'telah dibaca'
+   636→                (simulasi perubahan status pada state React).
+   637→
+   638→  FR-11.4       Notifikasi dikategorikan mengikut jenis (Info, Amaran,
+   639→                Kritikal) dengan kod warna (#007DC5, #F9BF10, #ED1C24).
+   640→  ------------- ---------------------------------------------------------
+   641→
+   642→5.12 Placeholder Pratonton Dokumen (Document Preview Placeholder)
+   643→
+   644→  ------------- ---------------------------------------------------------
+   645→  ID            Keperluan
+   646→
+   647→  FR-12.1       Setiap dokumen (Akta, ASIP, SOP, Pekeliling) mesti
+   648→                mempunyai butang 'Lihat Dokumen' yang membuka modal/panel
+   649→                pratonton.
+   650→
+   651→  FR-12.2       Placeholder pratonton memaparkan ikon jenis fail
+   652→                (PDF/DOCX), nama fail, saiz fail tiruan, dan mesej
+   653→                'Pratonton Dokumen Tidak Tersedia dalam Prototaip'
+   654→                (kerana tiada fail sebenar dimuat naik).
+   655→
+   656→  FR-12.3       Placeholder menyediakan butang 'Muat Turun'
+   657→                (simulasi/disabled) untuk fasa produksi akan datang.
+   658→  ------------- ---------------------------------------------------------
+   659→
+   660→5.13 Reka Bentuk Responsif (Responsive Layout)
+   661→
+   662→  ------------- ---------------------------------------------------------
+   663→  ID            Keperluan
+   664→
+   665→  FR-13.1       Portal mesti berfungsi dan kelihatan konsisten pada
+   666→                resolusi Desktop (≥1280px), Tablet (768px–1279px), dan
+   667→                Mudah Alih (≤767px).
+   668→
+   669→  FR-13.2       Susun atur grid/card mesti bertukar daripada berbilang
+   670→                lajur (desktop) kepada satu/dua lajur (mudah alih).
+   671→
+   672→  FR-13.3       Sidebar bertukar kepada menu hamburger pada paparan mudah
+   673→                alih (rujuk FR-3.4).
+   674→  ------------- ---------------------------------------------------------
+   675→
+   676→5.14 Suis Mod Gelap/Terang (Dark Mode Toggle)
+   677→
+   678→  ------------- ---------------------------------------------------------
+   679→  ID            Keperluan
+   680→
+   681→  FR-14.1       Terdapat suis (toggle switch) pada header untuk menukar
+   682→                antara Mod Terang dan Mod Gelap.
+   683→
+   684→  FR-14.2       Mod Terang menggunakan latar #FFFFFF dengan teks #202124;
+   685→                Mod Gelap menggunakan latar #202124 dengan teks
+   686→                #FFFFFF/#BDC1C6, dengan warna Biru PERKESO (#007DC5) dan
+   687→                Hijau (#8DC63E) kekal sebagai aksen dalam kedua-dua mod.
+   688→
+   689→  FR-14.3       Pilihan mod pengguna disimpan dalam state/local context
+   690→                sepanjang sesi pelayaran.
+   691→  ------------- ---------------------------------------------------------
+   692→
+   693→5.15 Struktur Sedia-Admin (Admin-Ready Structure)
+   694→
+   695→  ------------- ---------------------------------------------------------
+   696→  ID            Keperluan
+   697→
+   698→  FR-15.1       Pengguna berperanan Admin mempunyai akses kepada Panel
+   699→                Pentadbiran berasingan melalui sidebar.
+   700→
+   701→  FR-15.2       Panel Pentadbiran menyediakan antara muka pengurusan
+   702→                kandungan (Content Management) bagi semua modul: Tambah,
+   703→                Edit, Padam (CRUD) terhadap data tiruan dalam state
+   704→                aplikasi.
+   705→
+   706→  FR-15.3       Panel Pentadbiran memaparkan jadual pengurusan pengguna
+   707→                (User Management) — senarai pengguna tiruan, peranan, dan
+   708→                status.
+   709→
+   710→  FR-15.4       Struktur kod (folder/komponen) mesti direka supaya mudah
+   711→                disambungkan (plug-and-play) kepada API back-end sebenar
+   712→                pada fasa produksi tanpa perubahan besar pada komponen
+   713→                React sedia ada.
+   714→  ------------- ---------------------------------------------------------
+   715→
+   716→6. KEPERLUAN BUKAN FUNGSIAN (NON-FUNCTIONAL REQUIREMENTS)
+   717→
+   718→  ------------------- ---------------- -------------------------------------
+   719→  Kategori            ID               Keperluan
+   720→
+   721→  Kebolehgunaan       NFR-1            Antara muka mesti intuitif, konsisten
+   722→  (Usability)                          dengan identiti visual PERKESO, dan
+   723→                                       boleh dinavigasi tanpa latihan khas.
+   724→
+   725→  Prestasi            NFR-2            Masa muat setiap halaman (page load)
+   726→  (Performance)                        tidak melebihi 2 saat dalam
+   727→                                       persekitaran prototaip (data tiruan
+   728→                                       tempatan).
+   729→
+   730→  Kebolehskalaan      NFR-3            Seni bina komponen React mesti
+   731→  (Scalability)                        modular dan boleh dikembangkan untuk
+   732→                                       menampung integrasi API sebenar.
+   733→
+   734→  Keserasian Pelayar  NFR-4            Portal mesti serasi dengan pelayar
+   735→  (Compatibility)                      utama: Google Chrome, Microsoft Edge,
+   736→                                       Mozilla Firefox, Safari (versi
+   737→                                       terkini).
+   738→
+   739→  Responsif           NFR-5            Reka bentuk mesti mengikut prinsip
+   740→  (Responsiveness)                     mobile-first dan responsif sepenuhnya
+   741→                                       (rujuk FR-13.x).
+   742→
+   743→  Kebolehcapaian      NFR-6            Kontras warna teks/latar mesti
+   744→  (Accessibility)                      mematuhi garis panduan WCAG AA asas,
+   745→                                       terutamanya dalam mod gelap.
+   746→
+   747→  Keselamatan         NFR-7            Walaupun log masuk adalah tiruan
+   748→  (Security -                          (mock), struktur kod mesti memisahkan
+   749→  Prototaip)                           logik pengesahan (auth logic) untuk
+   750→                                       memudahkan penggantian dengan sistem
+   751→                                       pengesahan sebenar kelak.
+   752→
+   753→  Penyelenggaraan     NFR-8            Kod mesti dikomen dengan baik dan
+   754→  (Maintainability)                    mengikut konvensyen penamaan (naming
+   755→                                       convention) yang konsisten untuk
+   756→                                       memudahkan penyelenggaraan oleh
+   757→                                       pasukan IDEONIX/PERKESO.
+   758→  ------------------- ---------------- -------------------------------------
+   759→
+   760→7. PENDEKATAN PEMBANGUNAN MENGGUNAKAN Z.AI (MODEL GLM 5.2)
+   761→
+   762→Pasukan pembangunan IDEONIX akan menggunakan platform Z.ai dengan model
+   763→bahasa besar GLM 5.2 sebagai alat bantuan pembangunan pantas
+   764→(AI-assisted rapid development) bagi mempercepatkan penghasilan kod
+   765→komponen React, logik mock data store, dan penjanaan struktur styling
+   766→berasaskan tema warna yang ditetapkan dalam Seksyen 3.
+   767→
+   768→7.1 Panduan Prompt Pembangunan
+   769→
+   770→-   Setiap prompt kepada GLM 5.2 mesti menyertakan rujukan kod warna
+   771→    rasmi (#007DC5, #8DC63E, #FFFFFF, dan warna sekunder/neutral) bagi
+   772→    memastikan konsistensi tema.
+   773→
+   774→-   Prompt komponen mesti menyatakan keperluan responsif (mobile-first)
+   775→    secara eksplisit.
+   776→
+   777→-   Struktur data tiruan (mock data schema) dalam Seksyen 4.2 hendaklah
+   778→    dijadikan rujukan tetap semasa menjana logik komponen supaya
+   779→    struktur field konsisten merentasi semua modul.
+   780→
+   781→-   Kod yang dijana oleh GLM 5.2 mesti disemak semula (code review) oleh
+   782→    jurutera IDEONIX sebelum digabungkan (merge) ke repositori utama.
+   783→
+   784→7.2 Aliran Kerja Pembangunan (Development Workflow)
+   785→
+   786→6.  Definisi keperluan modul berdasarkan BRS ini.
+   787→
+   788→7.  Penjanaan awal komponen React dan mock data melalui Z.ai (GLM 5.2).
+   789→
+   790→8.  Semakan dan penambahbaikan kod oleh jurutera perisian IDEONIX.
+   791→
+   792→9.  Ujian fungsian (functional testing) merentasi peranti dan mod
+   793→    (gelap/terang).
+   794→
+   795→10. Semakan dan kelulusan oleh pihak PERKESO.
+   796→
+   797→11. Penyerahan prototaip berfungsi (deployment ke persekitaran staging).
+   798→
+   799→8. SENARIO / KES PENGGUNAAN (USE CASES)
+   800→
+   801→  --------- ------------------- -----------------------------------------
+   802→  ID        Aktor               Penerangan Senario
+   803→
+   804→  UC-01     Pengguna Am         Log masuk ke portal dan melihat papan
+   805→                                pemuka ringkasan pengumuman terkini.
+   806→
+   807→  UC-02     Pengguna Am         Menggunakan carian global untuk mencari
+   808→                                SOP berkaitan tuntutan pampasan pekerja.
+   809→
+   810→  UC-03     Pengguna Am         Menukar mod paparan kepada mod gelap
+   811→                                semasa bekerja waktu malam.
+   812→
+   813→  UC-04     Pengguna Am         Melihat notifikasi pekeliling baharu dan
+   814→                                menandakannya sebagai telah dibaca.
+   815→
+   816→  UC-05     Admin               Menambah pengumuman baharu dan
+   817→                                menyematkannya (pin) pada papan pemuka.
+   818→
+   819→  UC-06     Admin               Mengemas kini metadata Akta sedia ada
+   820→                                melalui Panel Pentadbiran.
+   821→
+   822→  UC-07     Pengguna Am (Mudah  Melayari portal menggunakan telefon
+   823→            Alih)               pintar dan mengakses menu melalui sidebar
+   824→                                hamburger.
+   825→  --------- ------------------- -----------------------------------------
+   826→
+   827→9. ANDAIAN DAN KEKANGAN
+   828→
+   829→9.1 Andaian
+   830→
+   831→-   Semua kandungan (Akta, SOP, pekeliling, FAQ) yang digunakan dalam
+   832→    prototaip adalah data contoh/tiruan (sample/dummy data) dan bukan
+   833→    dokumen rasmi sebenar melainkan dinyatakan sebaliknya oleh PERKESO.
+   834→
+   835→-   Pihak PERKESO akan membekalkan kandungan sebenar (jika perlu) pada
+   836→    fasa produksi selepas prototaip diluluskan.
+   837→
+   838→-   Fail logo dan garis panduan identiti visual yang dibekalkan adalah
+   839→    versi muktamad (final) untuk tujuan pembangunan tema.
+   840→
+   841→9.2 Kekangan
+   842→
+   843→-   Prototaip ini tidak disambungkan kepada mana-mana pelayan back-end
+   844→    atau pangkalan data produksi PERKESO.
+   845→
+   846→-   Sebarang fail dokumen sebenar (PDF/DOCX) tidak dimuat naik dalam
+   847→    fasa ini; hanya placeholder pratonton disediakan.
+   848→
+   849→-   Had masa pembangunan tertakluk kepada jadual projek yang
+   850→    dipersetujui bersama antara IDEONIX dan PERKESO.
+   851→
+   852→10. KRITERIA PENERIMAAN (ACCEPTANCE CRITERIA)
+   853→
+   854→-   Semua modul yang disenaraikan dalam Seksyen 1.3.1 (Dalam Skop)
+   855→    berfungsi sepenuhnya menggunakan data tiruan.
+   856→
+   857→-   Tema warna portal mematuhi sepenuhnya palet warna rasmi PERKESO
+   858→    (Seksyen 3.2) dan aksen jenama IDEONIX digunakan secara sesuai
+   859→    (Seksyen 3.1).
+   860→
+   861→-   Portal responsif dan berfungsi tanpa isu visual pada resolusi
+   862→    desktop, tablet, dan mudah alih.
+   863→
+   864→-   Mod gelap dan mod terang kedua-duanya berfungsi dengan kontras warna
+   865→    yang jelas dan boleh dibaca.
+   866→
+   867→-   Fungsi carian global mengembalikan keputusan yang tepat merentasi
+   868→    sekurang-kurangnya lima (5) modul kandungan.
+   869→
+   870→-   Struktur kod disahkan sedia untuk pengembangan (extension-ready)
+   871→    bagi integrasi Admin Panel dan API sebenar pada fasa seterusnya.
+   872→
+   873→11. LAMPIRAN
+   874→
+   875→Lampiran A — Rujukan Identiti Visual
+   876→
+   877→A.1 Rajah Identiti & Rasional Visual IDEONIX (Custom Lettermark 'X',
+   878→Midnight Blue #002147, Amber Orange #FFBF00) — rujuk fail imej yang
+   879→dibekalkan oleh klien.
+   880→
+   881→A.2 Dokumen 'Identiti Visual & Penjenamaan (PERKESO)' — rujuk dokumen
+   882→Word rasmi yang dibekalkan, mengandungi kod warna utama, sekunder, dan
+   883→neutral seperti dinyatakan dalam Seksyen 3.2.
+   884→
+   885→Lampiran B — Senarai Singkatan
+   886→
+   887→  ---------------- ------------------------------------------------------
+   888→  Singkatan        Maksud
+   889→
+   890→  PERKESO          Pertubuhan Keselamatan Sosial
+   891→
+   892→  ASIP             Akta Sistem Insurans Pekerjaan
+   893→
+   894→  SOP              Standard Operating Procedure (Prosedur Operasi
+   895→                   Standard)
+   896→
+   897→  FAQ              Frequently Asked Questions (Soalan Lazim)
+   898→
+   899→  BRS              Business Requirement Specification (Dokumen Keperluan
+   900→                   Perniagaan)
+   901→
+   902→  CRUD             Create, Read, Update, Delete
+   903→
+   904→  SPA              Single Page Application
+   905→
+   906→  UI/UX            User Interface / User Experience
+   907→
+   908→  GLM              General Language Model (model AI Z.ai)
+   909→  ---------------- ------------------------------------------------------
+   910→
+   911→— TAMAT DOKUMEN —
+   912→
+   913→Disediakan oleh IDEONIX Sdn Bhd untuk PERKESO
