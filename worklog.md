@@ -241,3 +241,28 @@ Stage Summary:
 - Dark/Light mode with proper color palettes for both.
 - Production-ready architecture with API routes abstracted for future back-end integration.
 
+
+---
+Task ID: FIX-LOGIN-READABILITY
+Agent: lead (IDEONIX)
+Task: Fix login page text unreadable in light mode (user reported cannot see/read wording)
+
+Work Log:
+- Analyzed user screenshot via VLM → root cause identified: shadcn `Card` component ships `bg-card text-card-foreground` utilities that in light mode evaluate to white background + dark text. These utilities override the `glass-strong` component class (which uses `var(--glass-bg)` = white in light mode too). Result: white card on dark IDEONIX gradient + hardcoded `text-white` content = invisible text in light mode.
+- Rewrote `src/components/layout/login-page.tsx`:
+  - Replaced shadcn `<Card>/<CardHeader>/<CardContent>/<CardDescription>` with a plain `<div>` using inline `style={{ background: "rgba(15,28,42,0.55)", backdropFilter: "blur(24px) saturate(180%)", borderColor: "rgba(255,255,255,0.15)" }}` — this is theme-independent so the card is always a dark translucent panel on the dark IDEONIX gradient.
+  - Replaced `bg-ideonix-gradient` Tailwind class with inline `style={{ background: ... }}` so the dark navy gradient is fixed (not theme-dependent).
+  - All text now uses explicit `text-white` / `text-white/70` / `text-white/85` — no theme variables.
+  - Inputs use inline `style={{ background: "rgba(255,255,255,0.08)" }}` + className `text-white placeholder:text-white/45 border-white/20` — visible in both modes.
+  - Bumped footer text from `text-white/50` to `text-white/75` for WCAG AA compliance (per VLM recommendation).
+- Verified via VLM:
+  - Light mode: ALL text rated GOOD (card title, description, input labels, placeholders, button, demo accounts, header, footer).
+  - Dark mode: ALL text rated GOOD/EXCELLENT (5/5 stars for primary content).
+- Verified login flow still works: clicked "Log Masuk" → navigated to Dashboard successfully.
+- Lint: 0 errors (1 pre-existing warning in prisma/seed.ts).
+
+Stage Summary:
+- Login page now fully readable in both light and dark mode.
+- Root cause was theme-dependent shadcn Card utilities (`bg-card`/`text-card-foreground`) overriding the glassmorphism styling in light mode.
+- Fix uses inline styles with fixed dark glass colors so the login card is theme-independent (always dark glass on dark gradient).
+- No other pages affected — they use the glassmorphism shell on light/dark themed backgrounds where the theme variables work correctly.
