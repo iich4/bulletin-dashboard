@@ -14,9 +14,9 @@ export async function GET(req: NextRequest) {
     if (mandatory === "true") where.isMandatory = true;
     if (search) {
       where.OR = [
-        { title: { contains: search } },
-        { circularNo: { contains: search } },
-        { summary: { contains: search } },
+        { title: { contains: search, mode: "insensitive" } },
+        { circularNo: { contains: search, mode: "insensitive" } },
+        { summary: { contains: search, mode: "insensitive" } },
       ];
     }
     const items = await db.circular.findMany({

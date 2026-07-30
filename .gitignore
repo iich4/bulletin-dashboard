@@ -37,7 +37,7 @@ yarn-error.log*
 # vercel
 .vercel
 
-# database (SQLite binary — regenerated via `bun run db:push && bun run db:seed`)
+# database (was used with SQLite; now on Supabase — kept for local fallback)
 /db/*.db
 /db/*.db-journal
 /prisma/migrations/dev.db

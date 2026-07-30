@@ -27,7 +27,7 @@ A comprehensive internal bulletin dashboard built with Next.js 16, TypeScript, T
 - **Frontend**: Next.js 16 (App Router) + TypeScript 5 + Tailwind CSS 4 + shadcn/ui (New York)
 - **State**: Zustand (auth + nav stores), TanStack Query-ready
 - **Backend**: Next.js API routes (REST endpoints under `/api/*`)
-- **Database**: Prisma ORM + SQLite (real backend with seed data)
+- **Database**: Prisma ORM + **Supabase (PostgreSQL)** — real backend with seed data
 - **Charts**: Recharts
 - **Animations**: Framer Motion
 - **Icons**: Lucide React
@@ -50,11 +50,17 @@ bun install   # or npm install / yarn install / pnpm install
 
 # 3. Configure environment
 cp .env.example .env
-# Edit .env to point DATABASE_URL to your preferred SQLite location
+# Edit .env — set DATABASE_URL to your Supabase PostgreSQL connection string
+# Get it from: Supabase Dashboard → Project → Settings → Database → Connection string
 
-# 4. Initialize the database
-bun run db:push     # create schema
+# 4. Initialize the database (Option A — Prisma CLI, requires PostgreSQL network access)
+bun run db:push     # create schema in Supabase
 bun run db:seed     # populate with realistic PERKESO dummy data
+
+# 4. Initialize the database (Option B — Supabase SQL Editor, no CLI/network restrictions)
+#    a. Open Supabase Dashboard → SQL Editor
+#    b. New query → paste contents of supabase/schema.sql → Run
+#    c. New query → paste contents of supabase/seed.sql → Run
 
 # 5. Start the dev server
 bun run dev
@@ -124,9 +130,10 @@ Additional seeded accounts: `nurul.huda@perkeso.gov.my` (Admin), `siti.noor@perk
 
 All list endpoints return `{ items: [...] }`.
 
-## Database Schema
+## Database
 
-8 entities per the BRS §4.2:
+This project uses **Supabase (PostgreSQL)** as its database, accessed via **Prisma ORM**. The schema is defined in `prisma/schema.prisma` and includes 8 entities per BRS §4.2:
+
 - **User** — id, email, name, role (Admin/Staff), department, branch, position, avatarUrl, isActive, lastLogin
 - **Announcement** — title, category, summary, content, authorName, isPinned, isNew, isUrgent, attachments[], coverColor, datePublished
 - **Act** — actNumber, title, category, description, version, status, lastUpdated
@@ -135,6 +142,32 @@ All list endpoints return `{ items: [...] }`.
 - **Circular** — circularNo, title, category, summary, content, isMandatory, dateIssued
 - **Faq** — question, answer, category, tags[]
 - **Notification** — userId, title, message, type (info/warning/success/critical), module, isRead
+
+### Setting up Supabase
+
+1. Create a new project at [supabase.com](https://supabase.com)
+2. Go to **Project → Settings → Database → Connection string** and copy the **Direct connection** URL
+3. Put it in `.env` as `DATABASE_URL` (no quotes needed):
+   ```
+   DATABASE_URL=postgresql://postgres:YOUR_PASSWORD@db.YOUR_PROJECT_REF.supabase.co:5432/postgres
+   ```
+4. Create the schema and seed data using **either** method:
+   - **CLI** (if your machine can reach port 5432): `bun run db:push && bun run db:seed`
+   - **SQL Editor** (works everywhere): paste `supabase/schema.sql` then `supabase/seed.sql` into the Supabase SQL Editor
+
+> **Note**: For serverless deployments (Vercel, Cloudflare Workers), use the Supabase **connection pooler** URL (port 6543) instead of the direct connection to avoid exhausting the connection pool.
+
+### Regenerating the SQL files
+
+If you modify `prisma/schema.prisma` or the seed data, regenerate the SQL files:
+
+```bash
+# Regenerate schema.sql from Prisma schema
+bunx prisma migrate diff --from-empty --to-schema-datamodel prisma/schema.prisma --script > supabase/schema.sql
+
+# Regenerate seed.sql from seed data
+bun run db:seed-sql
+```
 
 ## Scripts
 

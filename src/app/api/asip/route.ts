@@ -11,9 +11,9 @@ export async function GET(req: NextRequest) {
     if (status && status !== "all") where.status = status;
     if (search) {
       where.OR = [
-        { title: { contains: search } },
-        { referenceNo: { contains: search } },
-        { description: { contains: search } },
+        { title: { contains: search, mode: "insensitive" } },
+        { referenceNo: { contains: search, mode: "insensitive" } },
+        { description: { contains: search, mode: "insensitive" } },
       ];
     }
     const items = await db.asip.findMany({

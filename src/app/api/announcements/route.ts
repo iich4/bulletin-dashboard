@@ -12,9 +12,9 @@ export async function GET(req: NextRequest) {
     if (category && category !== "all") where.category = category;
     if (search) {
       where.OR = [
-        { title: { contains: search } },
-        { summary: { contains: search } },
-        { content: { contains: search } },
+        { title: { contains: search, mode: "insensitive" } },
+        { summary: { contains: search, mode: "insensitive" } },
+        { content: { contains: search, mode: "insensitive" } },
       ];
     }
 

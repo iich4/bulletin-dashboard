@@ -13,9 +13,9 @@ export async function GET(req: NextRequest) {
     if (status && status !== "all") where.status = status;
     if (search) {
       where.OR = [
-        { title: { contains: search } },
-        { actNumber: { contains: search } },
-        { description: { contains: search } },
+        { title: { contains: search, mode: "insensitive" } },
+        { actNumber: { contains: search, mode: "insensitive" } },
+        { description: { contains: search, mode: "insensitive" } },
       ];
     }
     const items = await db.act.findMany({

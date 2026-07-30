@@ -11,8 +11,8 @@ export async function GET(req: NextRequest) {
     if (category && category !== "all") where.category = category;
     if (search) {
       where.OR = [
-        { question: { contains: search } },
-        { answer: { contains: search } },
+        { question: { contains: search, mode: "insensitive" } },
+        { answer: { contains: search, mode: "insensitive" } },
       ];
     }
     const items = await db.faq.findMany({

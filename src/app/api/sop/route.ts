@@ -11,9 +11,9 @@ export async function GET(req: NextRequest) {
     if (department && department !== "all") where.department = department;
     if (search) {
       where.OR = [
-        { title: { contains: search } },
-        { description: { contains: search } },
-        { approvedBy: { contains: search } },
+        { title: { contains: search, mode: "insensitive" } },
+        { description: { contains: search, mode: "insensitive" } },
+        { approvedBy: { contains: search, mode: "insensitive" } },
       ];
     }
     const items = await db.sop.findMany({

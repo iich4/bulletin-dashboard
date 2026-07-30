@@ -15,9 +15,9 @@ export async function GET(req: NextRequest) {
       db.announcement.findMany({
         where: {
           OR: [
-            { title: { contains: q } },
-            { summary: { contains: q } },
-            { content: { contains: q } },
+            { title: { contains: q, mode: "insensitive" } },
+            { summary: { contains: q, mode: "insensitive" } },
+            { content: { contains: q, mode: "insensitive" } },
           ],
         },
         take: 5,
@@ -26,9 +26,9 @@ export async function GET(req: NextRequest) {
       db.act.findMany({
         where: {
           OR: [
-            { title: { contains: q } },
-            { actNumber: { contains: q } },
-            { description: { contains: q } },
+            { title: { contains: q, mode: "insensitive" } },
+            { actNumber: { contains: q, mode: "insensitive" } },
+            { description: { contains: q, mode: "insensitive" } },
           ],
         },
         take: 5,
@@ -37,9 +37,9 @@ export async function GET(req: NextRequest) {
       db.asip.findMany({
         where: {
           OR: [
-            { title: { contains: q } },
-            { referenceNo: { contains: q } },
-            { description: { contains: q } },
+            { title: { contains: q, mode: "insensitive" } },
+            { referenceNo: { contains: q, mode: "insensitive" } },
+            { description: { contains: q, mode: "insensitive" } },
           ],
         },
         take: 5,
@@ -48,9 +48,9 @@ export async function GET(req: NextRequest) {
       db.sop.findMany({
         where: {
           OR: [
-            { title: { contains: q } },
-            { description: { contains: q } },
-            { approvedBy: { contains: q } },
+            { title: { contains: q, mode: "insensitive" } },
+            { description: { contains: q, mode: "insensitive" } },
+            { approvedBy: { contains: q, mode: "insensitive" } },
           ],
         },
         take: 5,
@@ -59,9 +59,9 @@ export async function GET(req: NextRequest) {
       db.circular.findMany({
         where: {
           OR: [
-            { title: { contains: q } },
-            { circularNo: { contains: q } },
-            { summary: { contains: q } },
+            { title: { contains: q, mode: "insensitive" } },
+            { circularNo: { contains: q, mode: "insensitive" } },
+            { summary: { contains: q, mode: "insensitive" } },
           ],
         },
         take: 5,
@@ -70,8 +70,8 @@ export async function GET(req: NextRequest) {
       db.faq.findMany({
         where: {
           OR: [
-            { question: { contains: q } },
-            { answer: { contains: q } },
+            { question: { contains: q, mode: "insensitive" } },
+            { answer: { contains: q, mode: "insensitive" } },
           ],
         },
         take: 5,
