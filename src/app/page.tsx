@@ -16,6 +16,7 @@ import { SopPage } from "@/components/modules/sop-page";
 import { CircularsPage } from "@/components/modules/circulars-page";
 import { FaqPage } from "@/components/modules/faq-page";
 import { AdminPage } from "@/components/modules/admin-page";
+import { ChatAssistant } from "@/components/chat/chat-assistant";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Home() {
@@ -75,6 +76,7 @@ export default function Home() {
           <Footer />
         </div>
       </div>
+      <ChatAssistant />
     </DocPreviewProvider>
   );
 }

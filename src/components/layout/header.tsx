@@ -45,7 +45,10 @@ const NOTIF_ICONS: Record<string, React.ElementType> = {
 export function Header() {
   const { setMobileSidebarOpen, currentPage } = useNavStore();
   const { user, logout } = useAuthStore();
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
+  React.useEffect(() => setMounted(true), []);
+  const isDark = mounted && resolvedTheme === "dark";
 
   return (
     <header className="sticky top-0 z-30 glass-strong border-b border-border/50 px-4 sm:px-6 py-3">
@@ -87,13 +90,13 @@ export function Header() {
 
         {/* Theme toggle */}
         <button
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          onClick={() => setTheme(isDark ? "light" : "dark")}
           className="relative p-2 rounded-lg glass text-foreground hover:bg-muted/40 transition-colors"
           aria-label="Tukar mod gelap/terang"
-          title={theme === "dark" ? "Mod Terang" : "Mod Gelap"}
+          title={isDark ? "Mod Terang" : "Mod Gelap"}
         >
           <AnimatePresence mode="wait" initial={false}>
-            {theme === "dark" ? (
+            {isDark ? (
               <motion.span
                 key="sun"
                 initial={{ opacity: 0, rotate: -45 }}
