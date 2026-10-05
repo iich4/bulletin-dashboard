@@ -338,10 +338,21 @@ export function LoginPage() {
 
       {/* Footer credit */}
       <footer className="relative z-10 px-6 py-4 text-center text-xs text-white/75">
-        <div className="inline-flex items-center gap-2">
+        <div className="inline-flex flex-wrap items-center justify-center gap-2">
           <span>© 2026 PERKESO</span>
           <span className="text-white/40">|</span>
           <span className="text-[#FFBF00]">Powered by IDEONIX</span>
+          <span className="text-white/40">|</span>
+          <a
+            href="/BRS_PERKESO_Bulletin_Dashboard_FINAL_v2.0.docx"
+            download
+            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-white/10 hover:bg-white/20 border border-white/20 transition-colors text-white/90 hover:text-white"
+          >
+            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v12m0 0l-4-4m4 4l4-4M3 17v3a1 1 0 001 1h16a1 1 0 001-1v-3" />
+            </svg>
+            Muat Turun BRS v2.0 (Word)
+          </a>
         </div>
       </footer>
     </div>
