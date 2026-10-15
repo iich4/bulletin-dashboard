@@ -351,7 +351,17 @@ export function LoginPage() {
             <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v12m0 0l-4-4m4 4l4-4M3 17v3a1 1 0 001 1h16a1 1 0 001-1v-3" />
             </svg>
-            Muat Turun BRS v2.0 (Word)
+            BRS v2.0 (Word)
+          </a>
+          <a
+            href="/PERKESO_Bulletin_Dashboard_Presentation.mp4"
+            download
+            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-[#FFBF00]/20 hover:bg-[#FFBF00]/30 border border-[#FFBF00]/40 transition-colors text-[#FFBF00] hover:text-[#FFBF00]"
+          >
+            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            </svg>
+            Video (60s MP4)
           </a>
         </div>
       </footer>
